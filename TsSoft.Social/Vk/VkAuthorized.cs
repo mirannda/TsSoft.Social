@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
-    using Helpers = TsSoft.Social.Helpers;
 
     /// <author>Pavel Kurdikov</author>
     public class VkAuthorized
@@ -15,7 +14,7 @@
         private string redirectCallbackUrl;
         private ICollection<VkRight> rights;
 
-        protected Helpers.UriBuilder requestBuilder;
+        //protected Helpers.UriBuilder requestBuilder;
 
         public VkAuthorized(string appId, string appSecret, string callbackURL)
         {
@@ -32,7 +31,7 @@
 
         public VkUser GetUser(string appCode)
         {
-            var requestString = string.Format(VkConst.UriGetTokenTemplate, appId, appSecret, appCode, redirectCallbackUrl);
+            var requestString = string.Format(VkConst.UriGetUserTemplate, appId, appSecret, appCode, redirectCallbackUrl);
             string response;
 
             WebClient webClient = new WebClient();

@@ -10,7 +10,7 @@
         /// <summary>
         /// Получение токена
         /// </summary>
-        public const string UriGetTokenTemplate = "https://api.vkontakte.ru/oauth/access_token?client_id={0}&client_secret={1}&code={2}&redirect_uri={3}";
+        public const string UriGetUserTemplate = "https://api.vkontakte.ru/oauth/access_token?client_id={0}&client_secret={1}&code={2}&redirect_uri={3}";
 
         /// <summary>
         /// Выполнение метода

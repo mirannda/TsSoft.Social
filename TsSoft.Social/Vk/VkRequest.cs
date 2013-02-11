@@ -7,9 +7,6 @@
     using System.Text;
     using Helpers = TsSoft.Social.Helpers;
 
-    ///<summary>
-    ///
-    ///</summary>
     /// <author>Pavel Kurdikov</author>
     public class VkRequest
     {

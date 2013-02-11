@@ -42,12 +42,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TsSoft.Commons">
+      <HintPath>..\packages\TsSoft.Commons.2.0.4765.29167\lib\net40\TsSoft.Commons.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Facebook\FacebookAuthRequest.cs" />
-    <Compile Include="Facebook\FacebookParameters.cs" />
+    <Compile Include="Facebook\FacebookAuthorized.cs" />
+    <Compile Include="Facebook\FacebookConst.cs" />
+    <Compile Include="Facebook\FacebookMethod.cs" />
+    <Compile Include="Facebook\FacebookUser.cs" />
     <Compile Include="Facebook\FacebookPublisher.cs" />
     <Compile Include="Facebook\FacebookRequest.cs" />
+    <Compile Include="Facebook\FacebookRight.cs" />
     <Compile Include="Helpers\UriBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vk\VkRight.cs" />

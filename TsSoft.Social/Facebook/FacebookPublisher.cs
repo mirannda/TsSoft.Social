@@ -2,25 +2,17 @@
 {
     using System;
 
-    
+    /// <author>Pavel Kurdikov</author>
     public class FacebookPublisher
     {
-        /// <summary>
-        /// Идентификатор пользователя в Facebook
-        /// </summary>
-        public string UserId { get; set; }
-
-        /// <summary>
-        /// Токен доступа для публикации сообщений на стене
-        /// </summary>
-        public string AccessToken { get; set; }
+        public FacebookUser User { get; set; }
 
         public string Publish(string message)
         {
-            var request = new FacebookRequest(String.Format("https://graph.facebook.com/{0}/", UserId));
-            request.AccessToken = AccessToken;
+            var request = new FacebookRequest(String.Format(FacebookConst.UriMethodExecuteTemplate, User.UserId));
+            request.AccessToken = User.AccessToken;
             request.Parameters.Add("message", message);
-            return request.Execute("feed");
+            return request.Execute(FacebookMethod.Feed);
         }
     }
 }

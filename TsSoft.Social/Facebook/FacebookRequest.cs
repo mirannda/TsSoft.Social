@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Web;
-using Helpers = TsSoft.Social.Helpers;
-namespace TsSoft.Social.Facebook
+﻿namespace TsSoft.Social.Facebook
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
+    using System.Text;
+    using TssoftCommons.Collections;
+    using Helpers = TsSoft.Social.Helpers;
+
+    /// <author>Pavel Kurdikov</author>
     public class FacebookRequest
     {
         protected string apiUrl;
@@ -24,21 +25,17 @@ namespace TsSoft.Social.Facebook
             Parameters = new Dictionary<string, string>();
         }
 
-        protected void BuildRequestString(string methodName)
+        public virtual string Execute(FacebookMethod method)
         {
             requestBuilder = new Helpers.UriBuilder();
-            requestBuilder.BaseUrl = String.Format("{0}/{1}", apiUrl.Trim('/'), methodName.Trim('/'));
+            requestBuilder.BaseUrl = String.Format("{0}/{1}", apiUrl.Trim('/'), Enums.GetEnumDescription(method));
             requestBuilder.Append(Parameters);
-            
+
             if (!String.IsNullOrWhiteSpace(AccessToken))
             {
                 requestBuilder.Append("access_token", AccessToken);
             }
-        }
 
-        public virtual string Execute(string methodName)
-        {
-            BuildRequestString(methodName);
             string result = string.Empty;
             try
             {
@@ -51,7 +48,6 @@ namespace TsSoft.Social.Facebook
                 {
                     result = responseReader.ReadToEnd();
                 }
-                
             }
             catch (WebException wex)
             {

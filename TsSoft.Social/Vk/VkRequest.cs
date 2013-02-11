@@ -1,4 +1,4 @@
-﻿namespace TsSoft.Social.Vkontakte
+﻿namespace TsSoft.Social.Vk
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,11 @@
     using System.Text;
     using Helpers = TsSoft.Social.Helpers;
 
-    internal class VkRequest
+    ///<summary>
+    ///
+    ///</summary>
+    /// <author>Pavel Kurdikov</author>
+    public class VkRequest
     {
         protected string apiUrl;
 
@@ -21,29 +25,19 @@
             Parameters = new Dictionary<string, string>();
         }
 
-        protected void BuildRequestString(string methodName)
-        {
-            requestBuilder = new Helpers.UriBuilder(String.Format("{0}/{1}", apiUrl.Trim('/'), methodName.Trim('/')));
-            foreach (var item in Parameters)
-            {
-                if (!String.IsNullOrWhiteSpace(item.Value))
-                {
-                    requestBuilder.Append(item.Key, item.Value);
-                }
-            }
-        }
-
         public virtual string Execute(string methodName)
         {
-            BuildRequestString(methodName);
-            string result = "";
+            requestBuilder = new Helpers.UriBuilder();
+            requestBuilder.BaseUrl = String.Format("{0}/{1}", apiUrl.Trim('/'), methodName.Trim('/'));
+            requestBuilder.Append(Parameters);
+
+            string result = string.Empty;
             try
             {
-                var request = HttpWebRequest.Create(requestBuilder.Url);
+                var request = HttpWebRequest.Create(requestBuilder.Uri);
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.Method = "POST";
                 var response = request.GetResponse();
-
                 using (var responseReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                 {
                     result = responseReader.ReadToEnd();

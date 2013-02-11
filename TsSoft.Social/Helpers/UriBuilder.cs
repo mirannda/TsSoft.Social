@@ -1,45 +1,42 @@
 ﻿namespace TsSoft.Social.Helpers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Web;
 
-
     public class UriBuilder
     {
-        private string requestUrl;
-        private int parameterCount;
+        public string BaseUrl { get; set; }
 
-        public string Url
+        private IDictionary<string, string> parameters = new Dictionary<string, string>();
+
+        public string Uri
         {
             get
             {
-                return requestUrl;
+                var builder = new StringBuilder(BaseUrl);
+                if (parameters.Count > 0)
+                {
+                    var parameterPairs = parameters.Select(x => string.Format("{0}={1}", x.Key, HttpUtility.UrlEncode(x.Value)));
+                    builder.Append("?").Append(string.Join("&", parameterPairs));
+                }
+                return builder.ToString();
             }
-        }
-
-        public UriBuilder(string baseUrl)
-        {
-            requestUrl = baseUrl;
         }
 
         public UriBuilder Append(string name, string value)
         {
-            var builder = new StringBuilder(requestUrl);
-            string delimiter = "?";
-            if (parameterCount != 0)
+            parameters.Add(name, value);
+            return this;
+        }
+
+        public UriBuilder Append(IDictionary<string, string> appendParameters)
+        {
+            foreach (var parameter in appendParameters)
             {
-                delimiter = "&";
+                parameters.Add(parameter);
             }
-            else
-            {
-                delimiter = "?";
-            }
-            builder.Append(String.Format("{0}{1}={2}", delimiter, name, HttpUtility.UrlEncode(value)));
-            parameterCount++;
-            requestUrl = builder.ToString();
             return this;
         }
     }

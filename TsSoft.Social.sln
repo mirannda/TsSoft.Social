@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsSoft.Social", "TsSoft.Social\TsSoft.Social.csproj", "{D670BCA0-B417-40A7-B055-DD26FA0995B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsSoft.Social.Test", "TsSoft.Social.Test\TsSoft.Social.Test.csproj", "{C980B205-9B65-4774-A93B-1459E7A2B6D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{D670BCA0-B417-40A7-B055-DD26FA0995B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D670BCA0-B417-40A7-B055-DD26FA0995B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D670BCA0-B417-40A7-B055-DD26FA0995B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C980B205-9B65-4774-A93B-1459E7A2B6D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C980B205-9B65-4774-A93B-1459E7A2B6D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C980B205-9B65-4774-A93B-1459E7A2B6D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C980B205-9B65-4774-A93B-1459E7A2B6D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

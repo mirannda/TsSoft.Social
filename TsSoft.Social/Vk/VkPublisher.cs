@@ -1,5 +1,7 @@
 ﻿namespace TsSoft.Social.Vk
 {
+    using Newtonsoft.Json.Linq;
+
     public class VkPublisher
     {
         public VkUser User { get; set; }
@@ -7,7 +9,7 @@
         /// <summary>
         /// Publish Note
         /// </summary>
-        public string Publish(string title, string text)
+        public JObject Publish(string title, string text)
         {
             var request = new VkRequest(VkConst.MethodExecuteBaseUri);
             request.Parameters.Add("owner_id", User.UserId);

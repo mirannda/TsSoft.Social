@@ -4,7 +4,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
 
     /// <author>Pavel Kurdikov</author>
     public class VkAuthorized
@@ -31,19 +30,14 @@
 
         public VkUser GetUser(string appCode)
         {
-            var requestString = string.Format(VkConst.UriGetUserTemplate, appId, appSecret, appCode, redirectCallbackUrl);
-            string response;
-
-            WebClient webClient = new WebClient();
-            response = webClient.DownloadString(requestString);
-            JObject jsonResponse = JObject.Parse(response);
-            var properties = jsonResponse.Children().Cast<JProperty>();
-            if (properties.Any(x => x.Name == VkConst.JsonError))
-            {
-                var message = properties.Single(x => x.Name == VkConst.JsonError).Value.ToString();
-                throw new Exception(message);
-            }
-
+            var request = new VkRequest(VkConst.BaseUriGetUser);
+            request.Parameters.Add("client_id", appId);
+            request.Parameters.Add("client_secret", appSecret);
+            request.Parameters.Add("code", appCode);
+            request.Parameters.Add("redirect_uri", redirectCallbackUrl);
+            
+            var response = request.Execute("access_token");
+            var properties = response.Children().Cast<JProperty>();
             var token = properties.Single(x => x.Name == VkConst.JsonToken).Value.ToString();
             var userId = properties.Single(x => x.Name == VkConst.JsonUserId).Value.ToString();
             return new VkUser() { AccessToken = token, UserId = userId };

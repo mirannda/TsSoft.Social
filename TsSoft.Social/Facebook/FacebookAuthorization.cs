@@ -49,11 +49,11 @@
             string[] fbParameters = response.Split('&');
 
             var accessToken = fbParameters.Single(x => x.StartsWith(FacebookConst.ResponseAccessToken)).Split('=').Last();
-            var expires = Convert.ToInt32(fbParameters.Single(x => x.StartsWith(FacebookConst.ResponseExpireTime)).Split('=').Last());
+            var expires = fbParameters.Single(x => x.StartsWith(FacebookConst.ResponseExpireTime)).Split('=').Last();
             return new FacebookUser()
             {
                 AccessToken = accessToken,
-                ExpireTime = DateTime.Now + TimeSpan.FromMilliseconds(expires),
+                ExpireTime = DateTime.Now + TimeSpan.FromMilliseconds(Convert.ToInt32(expires)),
                 UserId = "me",
             };
         }

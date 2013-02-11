@@ -14,6 +14,5 @@
         public static string JsonErrorMessage = "message";
         public static string JsonErrorType = "type";
         public static string JsonErrorCode = "code";
-
     }
 }

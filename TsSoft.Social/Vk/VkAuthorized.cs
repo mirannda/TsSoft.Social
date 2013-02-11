@@ -8,7 +8,7 @@
     using Helpers = TsSoft.Social.Helpers;
 
     /// <author>Pavel Kurdikov</author>
-    public class VkRegister
+    public class VkAuthorized
     {
         private string appId;
         private string appSecret;
@@ -17,7 +17,7 @@
 
         protected Helpers.UriBuilder requestBuilder;
 
-        public VkRegister(string appId, string appSecret, string callbackURL)
+        public VkAuthorized(string appId, string appSecret, string callbackURL)
         {
             this.appId = appId;
             this.appSecret = appSecret;
@@ -50,13 +50,13 @@
             return new VkUser() { AccessToken = token, UserId = userId };
         }
 
-        public VkRegister AppendRight(VkRight right)
+        public VkAuthorized AppendRight(VkRight right)
         {
             rights.Add(right);
             return this;
         }
 
-        public VkRegister AppendRight(IEnumerable<VkRight> appendRights)
+        public VkAuthorized AppendRight(IEnumerable<VkRight> appendRights)
         {
             foreach (var right in appendRights)
             {

@@ -1,6 +1,6 @@
 ﻿namespace TsSoft.Social.Facebook
 {
-    using TSSoftCommons.Text;
+    using System.ComponentModel;
 
     /// <author>Pavel Kurdikov</author>
     public enum FacebookMethod

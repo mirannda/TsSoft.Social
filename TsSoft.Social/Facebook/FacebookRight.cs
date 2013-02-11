@@ -1,8 +1,9 @@
 ﻿namespace TsSoft.Social.Facebook
 {
-    using TSSoftCommons.Text;
+    using System.ComponentModel;
+    using TsSoft.Commons.Text;
 
-    /// <summary> 
+    /// <summary>
     /// http://developers.facebook.com/docs/reference/login/open-graph-permissions/
     /// </summary>
     /// <author>Pavel Kurdikov</author>

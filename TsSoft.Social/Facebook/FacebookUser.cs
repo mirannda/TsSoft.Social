@@ -2,6 +2,7 @@
 {
     using System;
 
+    /// <author>Pavel Kurdikov</author>
     public class FacebookUser
     {
         public string UserId { get; set; }

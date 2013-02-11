@@ -1,21 +1,19 @@
 ﻿namespace TsSoft.Social.Facebook
 {
-    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using TssoftCommons.Collections;
-    using Helpers = TsSoft.Social.Helpers;
+    using TsSoft.Commons.Collections;
 
     /// <author>Pavel Kurdikov</author>
-    public class FacebookAuthorized
+    public class FacebookAuthorization
     {
         private string appId;
         private string appSecret;
         private string redirectCallbackUrl;
         private ICollection<FacebookRight> rights;
 
-        public FacebookAuthorized(string appId, string appSecret, string callbackURL)
+        public FacebookAuthorization(string appId, string appSecret, string callbackURL)
         {
             this.appId = appId;
             this.appSecret = appSecret;
@@ -49,8 +47,9 @@
 
             string response = request.Execute(FacebookMethod.AccessToken);
             string[] fbParameters = response.Split('&');
-            var accessToken = fbParameters[0].Split('=')[1];
-            var expires = Convert.ToInt32(fbParameters[1].Split('=')[1]);
+
+            var accessToken = fbParameters.Single(x => x.StartsWith(FacebookConst.ResponseAccessToken)).Split('=').Last();
+            var expires = Convert.ToInt32(fbParameters.Single(x => x.StartsWith(FacebookConst.ResponseExpireTime)).Split('=').Last());
             return new FacebookUser()
             {
                 AccessToken = accessToken,
@@ -59,13 +58,13 @@
             };
         }
 
-        public FacebookAuthorized AppendRight(FacebookRight right)
+        public FacebookAuthorization AppendRight(FacebookRight right)
         {
             rights.Add(right);
             return this;
         }
 
-        public FacebookAuthorized AppendRight(IEnumerable<FacebookRight> appendRights)
+        public FacebookAuthorization AppendRight(IEnumerable<FacebookRight> appendRights)
         {
             foreach (var right in appendRights)
             {

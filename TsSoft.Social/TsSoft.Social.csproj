@@ -45,10 +45,6 @@
     <Reference Include="TsSoft.Commons">
       <HintPath>..\packages\TsSoft.Commons.2.0.4765.29167\lib\net40\TsSoft.Commons.dll</HintPath>
     </Reference>
-    <Reference Include="TSSoftCommons, Version=1.0.23.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\TSSoftCommons.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Facebook\FacebookAuthorized.cs" />

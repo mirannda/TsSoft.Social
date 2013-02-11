@@ -1,12 +1,13 @@
 ﻿namespace TsSoft.Social.Facebook
 {
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Text;
-    using TssoftCommons.Collections;
-    using Helpers = TsSoft.Social.Helpers;
+    using System.Linq;
+    using TsSoft.Commons.Collections;
 
     /// <author>Pavel Kurdikov</author>
     public class FacebookRequest
@@ -59,7 +60,33 @@
                     }
                 }
             }
+
+            JObject jError;
+            if (TryParseData(result, out jError))
+            {
+                var errorDescription = jError.Children().Cast<JProperty>().Single(x => x.Name == FacebookConst.JsonError).Value.Children().Cast<JProperty>();
+                var errorMessage = errorDescription.Single(x => x.Name == FacebookConst.JsonErrorMessage).Value.ToString();
+                throw new Exception(errorMessage);
+            }
             return result;
+        }
+
+        private bool TryParseData(String data, out JObject result)
+        {
+            bool parseResult = false;
+            JObject json = null;
+
+            try
+            {
+                json = JObject.Parse(data);
+                parseResult = true;
+            }
+            catch (Exception)
+            {
+            }
+
+            result = json;
+            return parseResult;
         }
     }
 }

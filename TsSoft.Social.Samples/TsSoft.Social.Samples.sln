@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsSoft.Social.Samples", "TsSoft.Social.Samples\TsSoft.Social.Samples.csproj", "{C297BA86-B0B5-4474-AD02-418CFB70E9C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsSoft.Social", "..\TsSoft.Social\TsSoft.Social.csproj", "{D670BCA0-B417-40A7-B055-DD26FA0995B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C297BA86-B0B5-4474-AD02-418CFB70E9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C297BA86-B0B5-4474-AD02-418CFB70E9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C297BA86-B0B5-4474-AD02-418CFB70E9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C297BA86-B0B5-4474-AD02-418CFB70E9C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D670BCA0-B417-40A7-B055-DD26FA0995B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D670BCA0-B417-40A7-B055-DD26FA0995B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D670BCA0-B417-40A7-B055-DD26FA0995B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D670BCA0-B417-40A7-B055-DD26FA0995B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

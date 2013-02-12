@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Авторизация</title>
+    @Styles.Render("~/content/Site.css")
+    @Scripts.Render("~/scripts/jquery-1.7.1.min.js")
+    <script>
+        $(document).ready(function () {
+            $(".auth").click(function () {
+                window.location = $(this).val();
+            });
+        });
+    </script>
+</head>
+<body>
+    @Html.Partial("MenuPartial")
+    <div class="form-container">
+        @if (ViewBag.message != null)
+        {
+            <div class="error">@ViewBag.message</div>
+        }
+        <button class="auth submit-button" value="@Url.Action("VkAuth", "Home")">Авторизоваться вконтакте</button><br />
+        <button class="auth submit-button" value="@Url.Action("FacebookAuth", "Home")">Авторизоваться в facebook</button>
+    </div>
+</body>
+</html>

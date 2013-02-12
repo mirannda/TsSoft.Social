@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Response</title>
+    @Styles.Render("~/content/Site.css")
+</head>
+<body>
+   @Html.Partial("MenuPartial")
+    <div class="form-container">
+        @if (ViewBag.error != null)
+        {
+            <div class="error">При отправке произошла ошибка:</div>
+            <div class="error">@ViewBag.error</div>            
+        }
+        else
+        {
+             <div class="form-title"><span>Запись успешно добавлена.</span></div>
+        }
+    </div>
+</body>
+</html>

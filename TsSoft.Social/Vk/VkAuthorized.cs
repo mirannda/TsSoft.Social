@@ -40,7 +40,7 @@
             var properties = response.Children().Cast<JProperty>();
             var token = properties.Single(x => x.Name == VkConst.JsonToken).Value.ToString();
             var userId = properties.Single(x => x.Name == VkConst.JsonUserId).Value.ToString();
-            return new VkUser() { AccessToken = token, UserId = userId };
+            return new VkUser() { AccessToken = token, VkUserId = userId };
         }
 
         public VkAuthorized AppendRight(VkRight right)

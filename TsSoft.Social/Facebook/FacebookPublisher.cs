@@ -9,7 +9,7 @@
 
         public string Publish(string message)
         {
-            var request = new FacebookRequest(String.Format(FacebookConst.UriMethodExecuteTemplate, User.UserId));
+            var request = new FacebookRequest(String.Format(FacebookConst.UriMethodExecuteTemplate, User.FacebookUserId));
             request.AccessToken = User.AccessToken;
             request.Parameters.Add("message", message);
             return request.Execute(FacebookMethod.Feed);

@@ -47,7 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Facebook\FacebookAuthorized.cs" />
+    <Compile Include="Facebook\FacebookAuthorization.cs" />
     <Compile Include="Facebook\FacebookConst.cs" />
     <Compile Include="Facebook\FacebookMethod.cs" />
     <Compile Include="Facebook\FacebookUser.cs" />

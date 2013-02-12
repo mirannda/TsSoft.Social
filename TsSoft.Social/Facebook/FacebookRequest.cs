@@ -60,15 +60,23 @@
                     }
                 }
             }
+            ErrorParser(result);
+            return result;
+        }
 
+        private void ErrorParser(string result)
+        {
             JObject jError;
             if (TryParseData(result, out jError))
             {
-                var errorDescription = jError.Children().Cast<JProperty>().Single(x => x.Name == FacebookConst.JsonError).Value.Children().Cast<JProperty>();
-                var errorMessage = errorDescription.Single(x => x.Name == FacebookConst.JsonErrorMessage).Value.ToString();
-                throw new Exception(errorMessage);
+                var error = jError.Children().Cast<JProperty>();
+                if (error.Any(x => x.Name == FacebookConst.JsonError))
+                {
+                    var errorDescription = error.Single(x => x.Name == FacebookConst.JsonError).Value.Children().Cast<JProperty>();
+                    var errorMessage = errorDescription.Single(x => x.Name == FacebookConst.JsonErrorMessage).Value.ToString();
+                    throw new Exception(errorMessage);
+                }
             }
-            return result;
         }
 
         private bool TryParseData(String data, out JObject result)

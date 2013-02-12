@@ -5,7 +5,7 @@
     /// <author>Pavel Kurdikov</author>
     public class FacebookUser
     {
-        public string UserId { get; set; }
+        public string FacebookUserId { get; set; }
 
         public string AccessToken { get; set; }
 

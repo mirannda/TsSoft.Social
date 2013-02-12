@@ -11,6 +11,10 @@ body {
     width: 342px;
 }
 
+textarea{
+    resize:vertical;
+    min-height: 120px;
+}
 .menu {
     margin: 10px 0 20px 0;
     width: 100%;
@@ -86,6 +90,14 @@ body {
     padding: 20px;
     width: 300px;
 }
+
+    .form-title input[type=checkbox]{
+        margin-left: 1px;
+        display: inline-block;
+        vertical-align: bottom;
+        position: relative;
+        bottom: 1px;
+    }
 
 .form-field {
     border: 1px solid #c9b7a2;
@@ -180,4 +192,8 @@ body {
     .submit-button.auth {
         width: 100%;
         margin-bottom: 10px;
+    }
+
+    .description{
+        padding-left: 20px;
     }

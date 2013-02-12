@@ -40,6 +40,8 @@
             {
                 ViewBag.message = message;
             }
+            ViewBag.facebookEnabled = context.FacebookUser.Any(x => x.ExpireTime > DateTime.Now);
+            ViewBag.vkEnabled = context.VkUser.Any();
             return View();
         }
 
@@ -94,35 +96,47 @@
             {
                 return RedirectToAction("SendMessage", new { message = e.Message });
             }
+            if (context.FacebookUser.Count() != 0)
+            {
+                context.FacebookUser.Remove(context.FacebookUser.First());
+            }
             context.FacebookUser.Add(user);
             context.SaveChanges();
             return RedirectToAction("SendMessage");
         }
 
+        public ActionResult ClearAuthorization()
+        {
+            context.FacebookUser.Remove(context.FacebookUser.First());
+            context.VkUser.Remove(context.VkUser.First());
+            context.SaveChanges();
+            return RedirectToAction("SendMessage");
+        }
+
         [HttpPost]
-        public ActionResult Request(string message, string title, string socialName)
+        public JsonResult MessageRequest(string message, string title, string socialName)
         {
             switch (socialName)
             {
                 case VkName:
-                    return RedirectToAction("VkRequest", new { message = message, title = title });
+                    return VkRequest(message, title);
 
                 case FacebookName:
-                    return RedirectToAction("FacebookRequest", new { message = message });
+                    return FacebookRequest(message);
 
                 case TwitterName:
-                    return RedirectToAction("SendMessage");
+                    return Json("");
 
                 default:
-                    return RedirectToAction("SendMessage");
+                    return Json("");
             }
         }
 
-        public ActionResult VkRequest(string message, string title)
+        private JsonResult VkRequest(string message, string title)
         {
             if (context.VkUser.Count() == 0)
             {
-                return RedirectToAction("Authorization", new { message = "Сначала нужно авторизоваться." });
+                return Json(new { status = "error", message = "vk.com error: " + "You must be authorized" });
             }
             var publisher = new VkPublisher();
             publisher.User = context.VkUser.First();
@@ -136,24 +150,24 @@
             }
             catch (Exception e)
             {
-                return RedirectToAction("Response", new { error = e.Message });
+                return Json(new { status = "error", message = "vk.com error: " + e.Message });
             }
-            return RedirectToAction("Response");
+            return Json(new { status = "success", message = "vk.com message sent" });
         }
 
-        public ActionResult FacebookRequest(string message)
+        private JsonResult FacebookRequest(string message)
         {
             var publisher = new FacebookPublisher();
             if (context.FacebookUser.Count() == 0)
             {
-                return RedirectToAction("Authorization", new { message = "Сначала нужно авторизоваться." });
+                return Json(new { status = "error", message = "Facebook error: " + "You must be authorized" });
             }
             publisher.User = context.FacebookUser.First();
             if (publisher.User.ExpireTime < DateTime.Now)
             {
                 context.FacebookUser.Remove(publisher.User);
                 context.SaveChanges();
-                return RedirectToAction("Authorization", new { message = "Токен истек. Авторизуйтесь заново." });
+                return Json(new { status = "error", message = "Facebook error: " + "Токен истек. Авторизуйтесь заново" });
             }
             try
             {
@@ -161,15 +175,9 @@
             }
             catch (Exception e)
             {
-                return RedirectToAction("Response", new { error = e.Message });
+                return Json(new { status = "error", message = "Facebook error: " + e.Message });
             }
-            return RedirectToAction("Response");
-        }
-
-        public ActionResult Response(string error = null)
-        {
-            ViewBag.error = error;
-            return View();
+            return Json(new { status = "success", message = "facebook message sent" });
         }
     }
 }

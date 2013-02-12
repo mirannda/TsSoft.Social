@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Авторизация</title>
+    <title>Authorization</title>
     @Styles.Render("~/content/Site.css")
     @Scripts.Render("~/scripts/jquery-1.7.1.min.js")
     <script>
@@ -25,8 +25,9 @@
         {
             <div class="error">@ViewBag.message</div>
         }
-        <button class="auth submit-button" value="@Url.Action("VkAuth", "Home")">Авторизоваться вконтакте</button><br />
-        <button class="auth submit-button" value="@Url.Action("FacebookAuth", "Home")">Авторизоваться в facebook</button>
+        <button class="auth submit-button" value="@Url.Action("FacebookAuth", "Home")">Logged in facebook</button><br />
+        <button class="auth submit-button" value="@Url.Action("VkAuth", "Home")">Logged in vk.com</button><br />
+        <button class="auth submit-button" value="@Url.Action("ClearAuthorization", "Home")">Clear authorization</button><br />
     </div>
 </body>
 </html>

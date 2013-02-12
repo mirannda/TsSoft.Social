@@ -1,5 +1,7 @@
 ﻿@{
     Layout = null;
+    var vkAttr = !ViewBag.vkEnabled ? new { @disabled = "disabled" } : null;
+    var facebookAttr = !ViewBag.facebookEnabled ? new { @disabled = "disabled" } : null;
 }
 
 <!DOCTYPE html>
@@ -7,46 +9,85 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Отправка сообщения</title>
+    <title>Sending a message</title>
     @Styles.Render("~/content/Site.css")
+    @Scripts.Render("~/scripts/jquery-1.7.1.min.js")
+    <script>
+
+        function Request() {
+            this.message = null;
+            this.title = null;
+            this.socialName = null;
+        }
+
+        Request.prototype.serialize = function (){
+            return 'message=' + this.message + '&title=' + this.title + '&socialName=' + this.socialName;
+        }
+
+        function sendMessage(request) {
+            $.ajax({
+                url: '@Url.Action("MessageRequest", "Home")',
+                data: request,
+                dataType: 'json',
+                type: "post",
+                success: sendMessageSuccessCallback,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+        function sendMessageSuccessCallback(data){
+            var responseDiv = $('<div class="form-title">' + data.message + '</div>');
+            (data.status === 'error') ? responseDiv.css({ "color": 'red' }) : responseDiv.css({ 'color': 'green' });
+            $('#lastFormElement').before(responseDiv);
+            console.log(data);
+        }
+        function sendMessageErrorCallback(jqXHR, textStatus, errorThrown) {
+        }
+
+        $(document).ready(function () {
+            $("#sendMessageForm").on("submit", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                var form = $(this);
+                var a = form.serialize();
+                console.log(a);
+                $('#sendMessageForm input[type=checkbox]:checked').each(function () {
+                    var request = new Request();
+                    request.message = form.children("#textMessage").val();
+                    request.title = form.children("#tileMessage").val();
+                    request.socialName = $(this).attr('name');
+                    sendMessage(request.serialize());
+                });
+                return false;
+            });
+        });
+    </script>
 </head>
 <body>
     @Html.Partial("MenuPartial")
 
     <div>
-        @using (Html.BeginForm("Request", "Home", FormMethod.Post, new { @class = "form-container" }))
+        @using (Html.BeginForm("MessageRequest", "Home", FormMethod.Post, new { @class = "form-container", @id = "sendMessageForm" }))
         {
-            @Html.AntiForgeryToken()
             <div class="form-title">
-                <h2>Отправка сообщения в социальные сети</h2>
+                <h2>Sending a message in social</h2>
                 @if (ViewBag.message != null)
                 { 
                     <h2 class="error">@ViewBag.message</h2>
                 }
             </div>
-            <div class="form-title">Сообщение:</div>
-            @Html.TextArea("message", new { @class = "form-field" })<br />
-            <div class="form-title">Заголовок (для контакта):</div>
-            @Html.TextBox("title", null, new { @class = "form-field" })<br />
-            <div class="form-title">
-                <table>
-                    <tr>
-                        <td>Вконтакте</td>
-                        <td>@Html.RadioButton("socialName", "vk", true, new { @class = "form-field" })</td>
-                    </tr>
-                    <tr>
-                        <td>Facebook</td>
-                        <td>@Html.RadioButton("socialName", "facebook", false, new { @class = "form-field" })</td>
-                    </tr>
-                    <tr>
-                        <td>Twitter</td>
-                        <td>@Html.RadioButton("socialName", "twitter", false, new { @class = "form-field" })</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="submit-container">
-                <input class="submit-button" type="submit" value="Отправить" />
+            <div class="form-title">Message:</div>
+            @Html.TextArea("message", new { @class = "form-field", @id = "textMessage" })<br />
+            <div class="form-title">Title (for vk.com):</div>
+            @Html.TextBox("title", null, new { @class = "form-field", @id = "tileMessage"})<br />
+            <div class="form-title">@Html.CheckBox("facebook", false, facebookAttr) <span class="description">Facebook</span></div>
+            <div class="form-title">@Html.CheckBox("vk", false, vkAttr) <span class="description">vk.com</span></div>
+            <div class="submit-container" id="lastFormElement">
+                <input class="submit-button" type="submit" value="Send" />
             </div>
         }
     </div>

@@ -139,6 +139,8 @@ textarea{
 }
 
 .submit-button {
+    width: 100%;
+    margin-bottom: .5em;
     cursor: pointer;
     border: 1px solid #447314;
     background: #6aa436;
@@ -187,11 +189,6 @@ textarea{
         background: -o-linear-gradient(top, #6aa436, #8dc059);
         background-image: -ms-linear-gradient(top, #6aa436 0%, #8dc059 100%);
         color: #31540c;
-    }
-
-    .submit-button.auth {
-        width: 100%;
-        margin-bottom: 10px;
     }
 
     .description{

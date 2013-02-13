@@ -40,9 +40,7 @@
             {
                 ViewBag.message = message;
             }
-            ViewBag.facebookEnabled = context.FacebookUser.Any(x => x.ExpireTime > DateTime.Now);
-            ViewBag.vkEnabled = context.VkUser.Any();
-            return View();
+            return View(context);
         }
 
         public ActionResult Authorization(string message = null)
@@ -107,8 +105,14 @@
 
         public ActionResult ClearAuthorization()
         {
-            context.FacebookUser.Remove(context.FacebookUser.First());
-            context.VkUser.Remove(context.VkUser.First());
+            if (context.FacebookUser.Any())
+            {
+                context.FacebookUser.Remove(context.FacebookUser.First());
+            }
+            if (context.VkUser.Any())
+            {
+                context.VkUser.Remove(context.VkUser.First());
+            }
             context.SaveChanges();
             return RedirectToAction("SendMessage");
         }

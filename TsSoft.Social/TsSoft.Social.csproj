@@ -60,7 +60,7 @@
     <Compile Include="Vk\VkConst.cs" />
     <Compile Include="Vk\VkUser.cs" />
     <Compile Include="Vk\VkPublisher.cs" />
-    <Compile Include="Vk\VkAuthorized.cs" />
+    <Compile Include="Vk\VkAuthorization.cs" />
     <Compile Include="Vk\VkRequest.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -17,7 +17,7 @@
         private const string TwitterName = "twitter";
         private static readonly UrlHelper urlHelper = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
 
-        private VkAuthorized vk = new VkAuthorized(
+        private VkAuthorization vk = new VkAuthorization(
             ConfigurationManager.AppSettings["Vk.appId"],
             ConfigurationManager.AppSettings["Vk.appSecret"],
             ConfigurationManager.AppSettings["AppBaseUrl"] + urlHelper.Content(urlHelper.Action("VkAuthResponse"))

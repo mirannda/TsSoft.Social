@@ -6,7 +6,7 @@
     using System.Linq;
 
     /// <author>Pavel Kurdikov</author>
-    public class VkAuthorized
+    public class VkAuthorization
     {
         private string appId;
         private string appSecret;
@@ -15,7 +15,7 @@
 
         //protected Helpers.UriBuilder requestBuilder;
 
-        public VkAuthorized(string appId, string appSecret, string callbackURL)
+        public VkAuthorization(string appId, string appSecret, string callbackURL)
         {
             this.appId = appId;
             this.appSecret = appSecret;
@@ -43,13 +43,13 @@
             return new VkUser() { AccessToken = token, VkUserId = userId };
         }
 
-        public VkAuthorized AppendRight(VkRight right)
+        public VkAuthorization AppendRight(VkRight right)
         {
             rights.Add(right);
             return this;
         }
 
-        public VkAuthorized AppendRight(IEnumerable<VkRight> appendRights)
+        public VkAuthorization AppendRight(IEnumerable<VkRight> appendRights)
         {
             foreach (var right in appendRights)
             {

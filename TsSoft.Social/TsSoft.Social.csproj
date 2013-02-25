@@ -47,6 +47,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\HttpRequest.cs" />
+    <Compile Include="Api\IPostMessageCommand.cs" />
+    <Compile Include="Api\ISocialCommand.cs" />
+    <Compile Include="Helpers\UriBuilder.cs" />
+    <Compile Include="OAuth\OAuthTokens.cs" />
     <Compile Include="Facebook\FacebookAuthorization.cs" />
     <Compile Include="Facebook\FacebookConst.cs" />
     <Compile Include="Facebook\FacebookMethod.cs" />
@@ -54,8 +59,11 @@
     <Compile Include="Facebook\FacebookPublisher.cs" />
     <Compile Include="Facebook\FacebookRequest.cs" />
     <Compile Include="Facebook\FacebookRight.cs" />
-    <Compile Include="Helpers\UriBuilder.cs" />
+    <Compile Include="Api\UriBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Twitter\GetRequestTokenCommand.cs" />
+    <Compile Include="Twitter\SendMessageCommand.cs" />
+    <Compile Include="Twitter\TwitterRequest.cs" />
     <Compile Include="Vk\VkRight.cs" />
     <Compile Include="Vk\VkConst.cs" />
     <Compile Include="Vk\VkUser.cs" />

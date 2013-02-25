@@ -1,18 +1,22 @@
-﻿namespace TsSoft.Social.Helpers
+﻿namespace TsSoft.Social.Api
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Web;
 
-
-    [Obsolete("Moved to TsSoft.Social.API")]
     public class UriBuilder
     {
         public string BaseUrl { get; set; }
 
         private IDictionary<string, string> parameters = new Dictionary<string, string>();
+
+        public UriBuilder() { }
+
+        public UriBuilder(string url)
+        {
+            BaseUrl = url;
+        }
 
         public string Uri
         {

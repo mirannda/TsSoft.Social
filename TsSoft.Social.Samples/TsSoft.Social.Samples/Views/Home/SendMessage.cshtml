@@ -103,11 +103,11 @@
             {
                 <button class="send submit-button" name="vk">Send in vk.com</button><br />                 
             }
-            if((Model.FacebookUser.Count() + Model.VkUser.Count()) > 1)
+            if ((Model.FacebookUser.Count(x => (x.ExpireTime > DateTime.Now)) + Model.VkUser.Count()) > 1)
             {
                 <button class="submit-button" id="sendAll">Send in all social</button><br />
             }
-            if((Model.FacebookUser.Count() + Model.VkUser.Count()) >= 1)
+            if((Model.FacebookUser.Count(x => (x.ExpireTime > DateTime.Now)) + Model.VkUser.Count()) >= 1)
             {
                 <button class="auth submit-button" value="@Url.Action("ClearAuthorization", "Home")">Clear authorization</button><br />                
             }

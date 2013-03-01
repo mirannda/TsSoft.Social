@@ -3,6 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsSoft.Social.Samples", "TsSoft.Social.Samples\TsSoft.Social.Samples.csproj", "{C297BA86-B0B5-4474-AD02-418CFB70E9C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8D0BB191-7E6C-4628-8BD8-35BA494BD781}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsSoft.Social", "..\TsSoft.Social\TsSoft.Social.csproj", "{D670BCA0-B417-40A7-B055-DD26FA0995B9}"
 EndProject
 Global

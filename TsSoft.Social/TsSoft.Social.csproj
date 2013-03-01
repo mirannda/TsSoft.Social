@@ -48,10 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\HttpRequest.cs" />
-    <Compile Include="Api\IPostMessageCommand.cs" />
+    <Compile Include="Api\IAuthorizeCommand.cs" />
+    <Compile Include="Api\IGetAccessTokenCommand.cs" />
+    <Compile Include="Api\IGetRequestTokenCommand.cs" />
+    <Compile Include="Api\ISendMessageCommand.cs" />
     <Compile Include="Api\ISocialCommand.cs" />
     <Compile Include="Helpers\UriBuilder.cs" />
-    <Compile Include="OAuth\OAuthTokens.cs" />
+    <Compile Include="OAuth\RequestCredentials.cs" />
+    <Compile Include="OAuth\AccessCredentials.cs" />
     <Compile Include="Facebook\FacebookAuthorization.cs" />
     <Compile Include="Facebook\FacebookConst.cs" />
     <Compile Include="Facebook\FacebookMethod.cs" />
@@ -60,7 +64,10 @@
     <Compile Include="Facebook\FacebookRequest.cs" />
     <Compile Include="Facebook\FacebookRight.cs" />
     <Compile Include="Api\UriBuilder.cs" />
+    <Compile Include="OAuth\OAuthHeaderGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Twitter\AuthorizeCommand.cs" />
+    <Compile Include="Twitter\GetAccessTokenCommand.cs" />
     <Compile Include="Twitter\GetRequestTokenCommand.cs" />
     <Compile Include="Twitter\SendMessageCommand.cs" />
     <Compile Include="Twitter\TwitterRequest.cs" />

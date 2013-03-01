@@ -1,30 +1,45 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TsSoft.Social.Api;
-using TsSoft.Social.OAuth;
-
-namespace TsSoft.Social.Twitter
+﻿namespace TsSoft.Social.Twitter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
+    using TsSoft.Social.Api;
+    using TsSoft.Social.OAuth;
+
+    /// <author>Evgeniy Yaroslavov</author>
     public class TwitterRequest: HttpRequest
     {
-        public string AccessToken { get; set; }
-        public string AccessTokenSecret { get; set; }
-        
+        public AccessCredentials Tokens { get; set; }
+
+        protected IDictionary<string, string> Parameters { get; protected set; }
+
+        public TwitterRequest()
+        {
+            Tokens = new AccessCredentials();
+            Parameters = new Dictionary<string, string>();
+        }
+
         protected virtual void Sign()
         {
-            if (!string.IsNullOrEmpty(AccessTokenSecret) && !string.IsNullOrEmpty(AccessToken))
+            var headerGenerator = new OAuthHeaderGenerator(new Uri(UriBuilder.BaseUrl), Method, Tokens);
+            foreach (var parameter in Parameters)
             {
-
+                headerGenerator.Parameters.Add(parameter.Key, parameter.Value);
+                UriBuilder.Append(parameter.Key, parameter.Value);
             }
+            Headers.Add("Authorization", headerGenerator.Execute());
         }
 
         protected override string GetResponse()
         {
-            Sign();
             return base.GetResponse();
+        }
+
+
+        protected static string ParseParameter(string parameterName, string source)
+        {
+            Match expressionMatch = Regex.Match(source, string.Format(@"{0}=(?<value>[^&]+)", parameterName));
+            return expressionMatch.Success ? expressionMatch.Groups["value"].Value : string.Empty;
         }
 
     }

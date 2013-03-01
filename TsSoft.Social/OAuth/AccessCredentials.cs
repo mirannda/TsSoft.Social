@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace TsSoft.Social.OAuth
+﻿namespace TsSoft.Social.OAuth
 {
-    public class OAuthTokens
+    /// <summary>
+    /// Authenticated request credentials
+    /// </summary>
+    /// <author>Evgeniy Yaroslavov</author>
+    public class AccessCredentials
     {
         public string AccessToken { get; set; }
 

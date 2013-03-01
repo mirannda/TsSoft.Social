@@ -1,8 +1,9 @@
 ﻿namespace TsSoft.Social.Api
 {
     using Newtonsoft.Json.Linq;
+
     /// <summary>
-    /// Defines a send message command
+    /// Posting message to the news feed
     /// </summary>
     /// <author>Evgeniy Yaroslavov</author>
     public interface ISendMessageCommand: ISocialCommand<JObject>

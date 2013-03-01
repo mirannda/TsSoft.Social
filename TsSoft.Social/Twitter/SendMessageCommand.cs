@@ -1,22 +1,22 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TsSoft.Social.Api;
-
-namespace TsSoft.Social.Twitter
+﻿namespace TsSoft.Social.Twitter
 {
-    public class SendMessageCommand : TwitterRequest, ISendMessageCommand
+    using System;
+    using TsSoft.Social.Api;
+
+    /// <author>Evgeniy Yaroslavov</author>
+    public class SendMessageCommand: TwitterRequest, ISocialCommand<string>
     {
         public string Title { get; set; }
         public string Text { get; set; }
         public string Image { get; set; }
         public string Link { get; set; }
 
-        public JObject Execute()
+        public string Execute()
         {
-            return JObject.Parse(GetResponse());
+            UriBuilder.BaseUrl = "https://api.twitter.com/1.1/statuses/update.json";
+            Parameters.Add("status", Text);
+            Sign();
+            return GetResponse();
         }
     }
 }

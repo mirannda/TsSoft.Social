@@ -7,7 +7,7 @@
     using System.Web;
 
 
-    [Obsolete("Moved to TsSoft.Social.API")]
+    [Obsolete("Moved to TsSoft.Social.Api")]
     public class UriBuilder
     {
         public string BaseUrl { get; set; }

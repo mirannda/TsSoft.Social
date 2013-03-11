@@ -11,7 +11,7 @@
     {
         public AccessCredentials Tokens { get; set; }
 
-        protected IDictionary<string, string> Parameters { get; protected set; }
+        protected IDictionary<string, string> Parameters { get; set; }
 
         public TwitterRequest()
         {

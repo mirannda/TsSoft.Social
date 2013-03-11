@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TsSoft.Social")]
-[assembly: AssemblyDescription("Lightweight clients for posting messages to the news feed in Facebook, Twitter (under construction) & VK")]
+[assembly: AssemblyDescription("Lightweight clients for posting messages to the news feed in Facebook, Twitter & VK")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("TS Soft")]
 [assembly: AssemblyProduct("TsSoft.Social")]
